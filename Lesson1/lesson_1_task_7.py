@@ -1,0 +1,13 @@
+def digit(num):
+    print(num, end='')
+digit(8)
+digit(8)
+digit(0)
+digit(0)
+digit(5)
+digit(5)
+digit(5)
+digit(3)
+digit(5)
+digit(3)
+digit(5)
