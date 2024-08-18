@@ -1,0 +1,11 @@
+Тест-кейс 1. Функция "capitalize" не отрабатывает ввиду ошибки в ее написании: "capitilize". 10 ошибок
+Lesson4/test_string_utils.py::test_capitalize[sam-Sam] FAILED                                         [  1%] 
+Lesson4/test_string_utils.py::test_capitalize[\u0430\u043d\u043d\u0430\u041c\u0430\u0440\u0438\u044f-\u0410\u043d\u043d\u0430\u043c\u0430\u0440\u0438\u044f] FAILED [  2%]      
+Lesson4/test_string_utils.py::test_capitalize[mary Anne-Mary anne] FAILED                             [  3%]
+Lesson4/test_string_utils.py::test_capitalize[sam1-Sam1] FAILED                                       [  4%]
+Lesson4/test_string_utils.py::test_capitalize[max-1-Max-1] FAILED                                     [  5%]
+Lesson4/test_string_utils.py::test_capitalize[-] FAILED                                               [  6%]
+Lesson4/test_string_utils.py::test_capitalize[123abc-123abc] FAILED                                   [  7%]
+Lesson4/test_string_utils.py::test_capitalize[MAX-Max] FAILED                                         [  8%]
+Lesson4/test_string_utils.py::test_capitalize[  big brother-  big brother] FAILED                     [  9%]
+Lesson4/test_string_utils.py::test_capitalize[little sister  -Little siser  ] FAILED                  [ 10%]
