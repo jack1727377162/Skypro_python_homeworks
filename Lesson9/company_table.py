@@ -5,17 +5,22 @@ from sqlalchemy import text
 class CompanyTable:
     __scripts = {
         "select": "select * from company where deleted_at is NULL",
-        "select_by_id": text("select * from company where id = :select_id"),
+        "select_by_id": text(
+            "select * from company where id = :select_id"
+            ),
         "select_only_active": 'select * from company where "is_active" = \
             True and "deleted_at" is NULL',
-        "delete_by_id": text("delete from company where id = :id_to_delete"),
+        "delete_by_id": text(
+            "delete from company where id = :id_to_delete"
+            ),
         "insert_new": text(
             'INSERT INTO company ("name", "description") \
                 VALUES (:new_name, :description)'
         ),
         "get_max_id": "select MAX(id) from company",
-        "get_employee": text('select * from employee where "company_id" = \
-                             :id_company'),
+        "get_employee": text(
+            'select * from employee where "company_id" = :id_company'
+            ),
         "create_employee": text(
             'insert into employee \
                 ("first_name", "last_name", "email", "company_id", "phone") \
@@ -25,13 +30,14 @@ class CompanyTable:
         "delete_employee": text(
             'delete from employee where "id" = :to_delete_employee'
         ),
-        "get_employee_by_id": text('select * from employee where \
-                                   "id" = :id_employee'),
+        "get_employee_by_id": text(
+            'select * from employee where "id" = :id_employee'
+            ),
         "edit_employee_info": text(
             "UPDATE employee SET first_name = :first_name_employee, \
                 last_name = :last_name_employee, email = :email_employee, \
-                    phone = :phone_employee, company_id = \
-                        :id_company WHERE id = :id_employee"
+                    phone = :phone_employee, \
+                        company_id = :id_company WHERE id = :id_employee"
         ),
     }
 
@@ -41,17 +47,18 @@ class CompanyTable:
     def get_companies(self):
         return self.__db.execute(self.__scripts["select"]).fetchall()
 
-    def get_company_by_id(self, id):
+    def get_company_by_id(self, company_id):
         return self.__db.execute(
-            self.__scripts["select_by_id"], select_id=id
+            self.__scripts["select_by_id"], select_id=company_id
         ).fetchall()
 
     def get_active_companies(self):
         return self.__db.execute(self.__scripts["select_only_active\
                                                 "]).fetchall()
 
-    def delete_company(self, id):
-        self.__db.execute(self.__scripts["delete_by_id"], id_to_delete=id)
+    def delete_company(self, company_id):
+        self.__db.execute(
+            self.__scripts["delete_by_id"], id_to_delete=company_id)
 
     def create_company(self, name, descr=""):
         self.__db.execute(
@@ -77,9 +84,9 @@ class CompanyTable:
             self.__scripts["get_employee"], id_company=company_id
         ).fetchall()
 
-    def delete_employee(self, id):
+    def delete_employee(self, id_employee):
         self.__db.execute(
-            self.__scripts["delete_employee"], to_delete_employee=id)
+            self.__scripts["delete_employee"], to_delete_employee=id_employee)
 
     def get_employee_by_id(self, employee_id):
         return self.__db.execute(

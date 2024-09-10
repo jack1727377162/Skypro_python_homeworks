@@ -1,21 +1,21 @@
 import requests
-from authorization import My_authorization
+from authorization import MyAuthorization
 
 
-class Employee:
-    def __init__(self, url):
-        self.url = url
-        self.auth = My_authorization(url)
+class TstEmployee:
+    def __init__(self, my_url):
+        self.my_url = my_url
+        self.auth = MyAuthorization(my_url)
 
     def get_employee_list(self, company_id):
         employee_list = requests.get(
-            self.url + "/employee" + "?company=" + str(company_id)
+            self.my_url + "/employee" + "?company=" + str(company_id)
         )
         return employee_list.json(), employee_list.status_code
 
-    def get_employee_by_id(self, id):
+    def get_employee_by_id(self, my_id):
         result_get_employee_id = requests.get(
-            self.url + "/employee/" + str(id))
+            self.my_url + "/employee/" + str(my_id))
         return result_get_employee_id.json(), \
             result_get_employee_id.status_code
 
@@ -30,7 +30,7 @@ class Employee:
         url,
         phone,
         birthdate,
-        isActive,
+        is_active,
     ):
         employee_info = {
             "id": id_num,
@@ -41,7 +41,7 @@ class Employee:
             "url": url,
             "phone": phone,
             "birthdate": birthdate,
-            "isActive": isActive,
+            "isActive": is_active,
         }
         my_token = {}
         my_token["x-client-token"] = self.auth.auth_user()
@@ -50,17 +50,21 @@ class Employee:
         )
         return result_add_employee.json(), result_add_employee.status_code
 
-    def edit_employee_info(self, id, last_name, email, url="", phone="", isActive=""): 
+    def edit_employee_info(
+            self, my_id, last_name, email, my_url="", phone="", is_active=""
+    ):
         employee_new_info = {
             "lastName": last_name,
             "email": email,
-            "url": url,
+            "url": my_url,
             "phone": phone,
-            "isActive": isActive,
+            "isActive": is_active,
         }
         my_token = {}
         my_token["x-client-token"] = self.auth.auth_user()
         result_edit_employee_info = requests.patch(
-            self.url + "/employee/" + str(id), json = employee_new_info, headers=my_token
-        )
-        return result_edit_employee_info.json(), result_edit_employee_info.status_code
+            self.my_url + "/employee/" + str(my_id),
+            json=employee_new_info, headers=my_token
+            )
+        return result_edit_employee_info.json(), \
+            result_edit_employee_info.status_code
